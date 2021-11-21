@@ -1,7 +1,4 @@
 import React, {useState} from 'react';
-import { Link } from 'react-router-dom';
-
-
 
 export default function Mainpage(){
     
@@ -47,7 +44,7 @@ export default function Mainpage(){
                 <input type="radio" name="userGender" value="male" onClick={handleChange}/>남자 <br/>
                 <input type="radio" name="userGender" value="female" onClick={handleChange}/>여자<br/><br/>
                 
-                <Link to='/start'><button type="submit" onClick={handleSubmit}>검사 시작</button></Link>
+                <button type="submit" onClick={handleSubmit}>검사 시작</button>
                 
             </form>
         </div>

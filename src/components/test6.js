@@ -4,16 +4,21 @@ import { Link } from 'react-router-dom';
 
 export default function Question_6(){
     const [answer, setAnswer] = useState({});
+    const [check,setCheck] = useState({
+        ans_26 : "",
+        ans_27: "",
+        ans_28: "",
+    });
+
+    const handleChange = e => {
+        setCheck({
+            ...check,
+            [e.target.name] : e.target.value
+        })
+    }
+    
     const questionList = async() =>{
-        //state를 빈 배열로 설정 후에 for문을 돌면서 
-        try{
             const res = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
-            // for(let i=0; i<res.data.RESULT.length; i++){
-            //     newAnswer.push({question: res.data.RESULT[i].question,
-            //     answer01: res.data.RESULT[i].answer01,
-            //     answer02: res.data.RESULT[i].answer02});
-            // }
-            // setAnswer(newAnswer);
             setAnswer({
                 question: res.data.RESULT[0].question,
                 answer251: res.data.RESULT[25].answer01,
@@ -22,42 +27,39 @@ export default function Question_6(){
                 answer262: res.data.RESULT[26].answer02,
                 answer271: res.data.RESULT[27].answer01,
                 answer272: res.data.RESULT[27].answer02,
-                // answer281: res.data.RESULT[28].answer01,
-                // answer292: res.data.RESULT[28].answer02,
-                // answer301: res.data.RESULT[29].answer01,
-                // answer302: res.data.RESULT[29].answer02,
             })
+    }
 
-        } catch(error){
-            console.error(error);
+    useEffect(()=>{
+        questionList()
+    },[])
+
+    function handleSubmit(e){
+        e.preventDefault();
+        if(check.ans_26 ==='' || check.ans_27 ==='' || check.ans_28 ===''){
+            alert('모든 항목을 체크해주세요.')
+        }
+        else{
+            window.location.href ='/'
         }
     }
-    useEffect(()=>{questionList()},[])
+
     return(
         <div> 
             <p>Q26.{answer.question}</p>
-            <input type="radio"/> {answer.answer251}
-            <input type="radio"/> {answer.answer252}
+            <input type="radio" name="ans_26" value={answer.answer251} onClick={handleChange}/> {answer.answer251}
+            <input type="radio" name="ans_26" value={answer.answer252} onClick={handleChange}/> {answer.answer252}
             <br/>
             <p>Q27.{answer.question}</p>
-            <input type="radio"/> {answer.answer261}
-            <input type="radio"/> {answer.answer262}
+            <input type="radio" name="ans_27" value={answer.answer261} onClick={handleChange}/> {answer.answer261}
+            <input type="radio" name="ans_27" value={answer.answer262} onClick={handleChange}/> {answer.answer262}
             <br/>
             <p>Q28.{answer.question}</p>
-            <input type="radio"/> {answer.answer271}
-            <input type="radio"/> {answer.answer272}
-            {/* <br/>
-            <p>Q29.{answer.question}</p>
-            <input type="radio"/> {answer.answer281}
-            <input type="radio"/> {answer.answer282}
+            <input type="radio" name="ans_28" value={answer.answer271} onClick={handleChange}/> {answer.answer271}
+            <input type="radio" name="ans_28" value={answer.answer272} onClick={handleChange}/> {answer.answer272}
             <br/>
-            <p>Q30.{answer.question}</p>
-            <input type="radio"/> {answer.answer291}
-            <input type="radio"/> {answer.answer292}
-            <br/> */}
             <Link to='/test5'><button type="submit">이전</button></Link>
-            <Link to='/start'><button type="submit">다음</button></Link>
+            <button type="submit" onClick={handleSubmit}>다음</button>
         </div>
-
     )
 }

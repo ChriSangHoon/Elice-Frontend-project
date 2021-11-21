@@ -8,7 +8,7 @@ import Question_3 from './components/test3';
 import Question_4 from './components/test4';
 import Question_5 from './components/test5';
 import Question_6 from './components/test6';
-
+// import Question from './components/test_develop';
 
 function App() {
   return (
@@ -22,6 +22,7 @@ function App() {
       <Route path='/test4'><Question_4></Question_4></Route>
       <Route path='/test5'><Question_5></Question_5></Route>
       <Route path='/test6'><Question_6></Question_6></Route>
+      {/* <Route path='/develop'><Question></Question></Route> */}
 
     </div>
   );
