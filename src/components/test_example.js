@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 
 export default function Test(){
 
+    const history = useHistory();
+    const location = useLocation();
     const [check,setCheck] = useState({
         checked : ""
     });
@@ -14,10 +17,14 @@ export default function Test(){
 
     function handleSubmit(e){
         e.preventDefault();
-        if(check.checked == ''){
+        if(check.checked === ''){
             alert('하나를 체크하세요!')
         }
         else{
+            history.push({
+                pathname: '/test1',
+                state: {...location.state}
+            })
             window.location.href ='/test1'
         }
     }

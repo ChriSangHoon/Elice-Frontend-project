@@ -1,15 +1,20 @@
 import axios from 'axios';
+import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 
 export default function Question_2(){
-    const [answer, setAnswer] = useState({});
-    const [check,setCheck] = useState({
-        ans_6 : "",
-        ans_7: "",
-        ans_8: "",
-        ans_9: "",
-        ans_10: ""
+
+    const history = useHistory();
+    const location = useLocation();
+    const [percent,setPercent]= useState(18);
+
+    const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
+        B6: "",
+        B7: "",
+        B8: "",
+        B9: "",
+        B10: ""
     });
     
     const handleChange = e => {
@@ -17,62 +22,65 @@ export default function Question_2(){
             ...check,
             [e.target.name] : e.target.value
         })
+        setPercent(Math.round((e.target.className/28)*100))
+        console.log(percent);
     }
 
+    const [result,setResult]= useState([]);
     const questionList = async() =>{
             const res = await axios.get('https://www.career.go.kr/inspct/openapi/test/questions?apikey=73587f95ef371322626bf3a537e9eb3b&q=6')
-            setAnswer({
-                question: res.data.RESULT[0].question,
-                answer51: res.data.RESULT[5].answer01,
-                answer52: res.data.RESULT[5].answer02,
-                answer61: res.data.RESULT[6].answer01,
-                answer62: res.data.RESULT[6].answer02,
-                answer71: res.data.RESULT[7].answer01,
-                answer72: res.data.RESULT[7].answer02,
-                answer81: res.data.RESULT[8].answer01,
-                answer82: res.data.RESULT[8].answer02,
-                answer91: res.data.RESULT[9].answer01,
-                answer92: res.data.RESULT[9].answer02,
-            })
+            try{
+                setResult(res.data.RESULT.splice(5,10))
+            } catch(error){
+                console.log(error);
+            }
     }
     useEffect(()=>{
+        window.localStorage.setItem("check", JSON.stringify(check));
         questionList()
-    },[])
+        console.log(location.state);
+    }, [check])
 
     function handleSubmit(e){
-        e.preventDefault();
-        if(check.ans_6 ==='' || check.ans_7 ==='' || check.ans_8 ==='' || check.ans_9 ==='' || check.ans_10 ===''){
+        if(check.B6 ==='' || check.B7 ==='' || check.B8 ==='' || check.B9 ==='' || check.B10 ===''){
             alert('모든 항목을 체크해주세요.')
         }
         else{
+            history.push({
+                pathname : '/test3',
+                state: {...location.state, ...check},
+            })
             window.location.href ='/test3'
+            // console.log(check);
         }
     }
+
     return(
-        <div> 
-            <p>Q6.{answer.question}</p>
-            <input type="radio" name="ans_6" value={answer.answer51} onClick={handleChange}/> {answer.answer51}
-            <input type="radio" name="ans_6" value={answer.answer52} onClick={handleChange}/> {answer.answer52}
+        <div>
+            <progress max="100" value={percent} ></progress> {percent}%
+            <p>Q6.{result[0]?.question}</p>
+            <input type="radio" name="B6" value='11' className='6' checked={check.B6 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}
+            <input type="radio" name="B6" value='12' className='6' checked={check.B6 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}
             <br/>
-            <p>Q7.{answer.question}</p>
-            <input type="radio" name="ans_7" value={answer.answer61} onClick={handleChange}/> {answer.answer61}
-            <input type="radio" name="ans_7" value={answer.answer62} onClick={handleChange}/> {answer.answer62}
+            <p>Q7.{result[0]?.question}</p>
+            <input type="radio" name="B7" value='13' className='7' checked={check.B7 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}
+            <input type="radio" name="B7" value='14' className='7' checked={check.B7 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}
             <br/>
-            <p>Q8.{answer.question}</p>
-            <input type="radio" name="ans_8" value={answer.answer71} onClick={handleChange}/> {answer.answer71}
-            <input type="radio" name="ans_8" value={answer.answer72} onClick={handleChange}/> {answer.answer72}
+            <p>Q8.{result[0]?.question}</p>
+            <input type="radio" name="B8" value='15' className='8' checked={check.B8 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}
+            <input type="radio" name="B8" value='16' className='8' checked={check.B8 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}
             <br/>
-            <p>Q9.{answer.question}</p>
-            <input type="radio" name="ans_9" value={answer.answer81} onClick={handleChange}/> {answer.answer81}
-            <input type="radio" name="ans_9" value={answer.answer82} onClick={handleChange}/> {answer.answer82}
+            <p>Q9.{result[0]?.question}</p>
+            <input type="radio" name="B9" value='17' className='9' checked={check.B9 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}
+            <input type="radio" name="B9" value='18' className='9' checked={check.B9 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}
             <br/>
-            <p>Q10.{answer.question}</p>
-            <input type="radio" name="ans_10" value={answer.answer91} onClick={handleChange}/> {answer.answer91}
-            <input type="radio" name="ans_10" value={answer.answer92} onClick={handleChange}/> {answer.answer92}
+            <p>Q10.{result[0]?.question}</p>
+            <input type="radio" name="B10" value='19' className='10' checked={check.B10 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}
+            <input type="radio" name="B10" value='20' className='10' checked={check.B10 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}
             <br/>
             <Link to='/test1'><button type="submit">이전</button></Link>
             <button type="submit" onClick={handleSubmit}>다음</button>
         </div>
 
-    )
+    );
 }
