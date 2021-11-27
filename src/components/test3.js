@@ -38,7 +38,6 @@ export default function Question_3(){
     useEffect(()=>{
         window.localStorage.setItem("check", JSON.stringify(check));
         questionList()
-        console.log(location.state);
     }, [check])
 
     function handleSubmit(e){
@@ -52,7 +51,6 @@ export default function Question_3(){
                 state: {...location.state, ...check},
             })
             window.location.href ='/test4'
-            // console.log(check);
         }
     }
     

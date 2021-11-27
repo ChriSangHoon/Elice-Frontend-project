@@ -37,8 +37,6 @@ export default function Question_4(){
     useEffect(()=>{
         window.localStorage.setItem("check", JSON.stringify(check));
         questionList()
-        console.log(location.state);
-        console.log(result[0]?.answer02)
     }, [check])
 
     function handleSubmit(e){

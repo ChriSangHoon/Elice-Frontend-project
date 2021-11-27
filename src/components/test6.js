@@ -7,8 +7,6 @@ export default function Question_6(){
     const history = useHistory();
     const location = useLocation();
     const [percent,setPercent]= useState(89);
-
-    console.log(location.state);
     const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
         B26: "",
         B27: "",

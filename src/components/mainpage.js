@@ -25,7 +25,6 @@ export default function Mainpage(){
 
     function handleSubmit(e) {
         e.preventDefault();
-        console.log(userid);
         if (userid.userGender === '' || userid.userName === '' ){
             alert("이름과 성별을 정확히 입력해주세요.")
         }

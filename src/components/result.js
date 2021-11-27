@@ -59,8 +59,6 @@ export default function PrevResult(){
         for (let i=1; i<Object.keys(location.state).length -1 ; i++) {
             ansString += `B${i}=${Object.values(location.state)[i+1]} `
         };
-        console.log(ansString);
-        console.log(location.state);
         const data = {
             "apikey": "73587f95ef371322626bf3a537e9eb3b",
             "qestrnSeq": "6",
@@ -72,6 +70,7 @@ export default function PrevResult(){
             "startDtm": 1550466291034,
             "answers": ansString
         }
+        //강면구님 코드 참조하여 axios.post
         async function Post(){
             const url = "https://www.career.go.kr/inspct/openapi/test/report?apikey=73587f95ef371322626bf3a537e9eb3b&qestrnSeq=6";
             const response = await axios.post(url, JSON.stringify(data), {
@@ -80,11 +79,8 @@ export default function PrevResult(){
                 }
             })
             const getUrl = response.data.RESULT.url;
-            console.log(getUrl);
             const seq = getUrl.split('=')[1];
-            console.log(seq);
             const getResponse = await axios.get(`https://www.career.go.kr/inspct/api/psycho/report?seq=${seq}`)
-            console.log(getResponse);
             const wonList = getResponse.data.result.wonScore.split(' ')
             let obj= {};
 
@@ -97,9 +93,6 @@ export default function PrevResult(){
                     };
                 }
             });
-
-            console.log(obj);
-            console.log(wonList);
             const tempArray = Object.values(obj);
             setTempArray(Object.values(obj));
 
@@ -125,7 +118,6 @@ export default function PrevResult(){
             const newGrad=[];
 
             const eduUrl = await axios.get(`https://inspct.career.go.kr/inspct/api/psycho/value/jobs?no1=${no_1}&no2=${no_2}`);
-            console.log(eduUrl);
             eduUrl.data.map((item,i)=>{
                 if(item[2]=== 1){
                     setMid(()=>{
@@ -168,14 +160,14 @@ export default function PrevResult(){
             const newMed = [];
             const newArtphy = [];
             const majorUrl = await axios.get(`https://inspct.career.go.kr/inspct/api/psycho/value/majors?no1=${no_1}&no2=${no_2}`);
-            console.log(majorUrl.data);
 
             majorUrl.data.map((item,i)=>{
                 if(item[2]==0){
                     setNone(()=>{
                         newNone.push(majorUrl?.data[i][1]);
                         const set = new Set(newNone);
-                        return [...set];                    })
+                        return [...set];
+                    })
                 }else if(item[2]==1){
                     setHum(()=>{
                         newHum.push(majorUrl?.data[i][1]);
@@ -233,7 +225,7 @@ export default function PrevResult(){
 
     return(
         <div class="container">
-            <h1>직업가치관검사 결과표</h1>
+            <h1 style={{color: 'rgba(0,0,255,0.4)'}}>직업가치관검사 결과표</h1>
                 <br/>
                 <p style={{textAlign:'left'}}>직업가치관이란 직업을 선택할 때 영향을 끼치는 자신만의 믿음과 신념입니다.
                 따라서 여러분의 직업생활과 관련하여 포기하지 않는 무게중심의 역할을 한다고 볼 수 있습니다.
@@ -267,8 +259,8 @@ export default function PrevResult(){
                 />
                 <br/>
             </div>
-            <p style={{textAlign:'center'}}> {location.state.userName}님은 <strong>{important}</strong>은(는) 중요하게 생각합니다.<br/>
-            반면에 <strong>{unimportant}</strong>(은)는 비교적 덜 중요하게 생각합니다.</p>
+            <p style={{textAlign:'center'}}> {location.state.userName}님은 <strong style={{color: 'rgba(0,0,255,0.4)'}}>{important}</strong>은(는) 중요하게 생각합니다.<br/>
+            반면에 <strong style={{color: 'rgba(0,0,255,0.4)'}}>{unimportant}</strong>(은)는 비교적 덜 중요하게 생각합니다.</p>
             <br/>
             <strong><p style={{textAlign:'left'}}>2. 가치관과 관련이 높은 직업</p></strong>
             <div style={{width:'100%', height:'80px', backgroundColor:'rgba(0,0,255,0.1)'}} >
@@ -352,7 +344,7 @@ export default function PrevResult(){
             </table>
             <br/>
             <br/>
-            <Link to='/'><button type="submit" class="btn btn-outline-primary">다시 검사하기</button></Link> &ensp;
+            <Link to='/' onClick={localStorage.clear()}><button type="submit" class="btn btn-outline-primary">다시 검사하기</button></Link> &ensp;
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </div>

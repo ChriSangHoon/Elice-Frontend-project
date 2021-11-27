@@ -8,7 +8,6 @@ export default function Question_2(){
     const history = useHistory();
     const location = useLocation();
     const [percent,setPercent]= useState(18);
-
     const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
         B6: "",
         B7: "",
@@ -23,9 +22,6 @@ export default function Question_2(){
             [e.target.name] : e.target.value
         })
         setPercent(Math.round((e.target.className/28)*100))
-        // console.log(percent);
-        // console.log(check);
-        // console.log(result);
     }
 
     const [result,setResult]= useState([]);
@@ -40,9 +36,6 @@ export default function Question_2(){
     useEffect(()=>{
         window.localStorage.setItem("check", JSON.stringify(check));
         questionList()
-        console.log(location.state);
-        // console.log(check);
-        // console.log()
     }, [check])
 
     function handleSubmit(e){
