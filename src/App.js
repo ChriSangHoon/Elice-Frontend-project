@@ -15,7 +15,6 @@ import Result from './components/result';
 function App() {
   return (
     <div className="App">
-
       <Route exact path='/'><Mainpage></Mainpage></Route>
       <Route path='/start'><Test></Test></Route>
       <Route path='/test1'><Question_1></Question_1></Route>

@@ -56,31 +56,35 @@ export default function Question_4(){
     }
 
     return(
-        <div>
-            <progress max="100" value={percent} ></progress> {percent}%
-
-            <p>Q16.{result[0]?.question}</p>
-            <input type="radio" name="B16" value='31' className='16' checked={check.B16 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}
-            <input type="radio" name="B16" value='32' className='16' checked={check.B16 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}
-            <br/>
-            <p>Q17.{result[0]?.question}</p>
-            <input type="radio" name="B17" value='33' className='17' checked={check.B17 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}
-            <input type="radio" name="B17" value='34' className='17' checked={check.B17 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}
-            <br/>
-            <p>Q18.{result[0]?.question}</p>
-            <input type="radio" name="B18" value='35' className='18' checked={check.B18 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}
-            <input type="radio" name="B18" value='36' className='18' checked={check.B18 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}
-            <br/>
-            <p>Q19.{result[0]?.question}</p>
-            <input type="radio" name="B19" value='37' className='19' checked={check.B19 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}
-            <input type="radio" name="B19" value='38' className='19' checked={check.B19 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}
-            <br/>
-            <p>Q20.{result[0]?.question}</p>
-            <input type="radio" name="B20" value='39' className='20' checked={check.B20 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}
-            <input type="radio" name="B20" value='40' className='20' checked={check.B20 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}
-            <br/>
-            <Link to='/test3'><button type="submit">이전</button></Link>
-            <button type="submit" onClick={handleSubmit}>다음</button>
+        <div class="container">
+            <div class="question">
+                <div class="progress" style={{height: '25px'}}>
+                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style={{width: `${percent}%`}}>{percent}%</div>
+                </div>
+                <br/>
+                <p>Q16.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B16" value='31' className='16' checked={check.B16 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B16" value='32' className='16' checked={check.B16 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}</label> &ensp;
+                <br/><br/>
+                <p>Q17.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B17" value='33' className='17' checked={check.B17 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B17" value='34' className='17' checked={check.B17 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}</label> &ensp;
+                <br/><br/>
+                <p>Q18.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B18" value='35' className='18' checked={check.B18 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B18" value='36' className='18' checked={check.B18 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}</label> &ensp;
+                <br/><br/>
+                <p>Q19.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B19" value='37' className='19' checked={check.B19 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B19" value='38' className='19' checked={check.B19 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}</label> &ensp;
+                <br/><br/>
+                <p>Q20.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B20" value='39' className='20' checked={check.B20 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B20" value='40' className='20' checked={check.B20 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}</label> &ensp;
+            </div>
+            <br/><br/>
+            <Link to='/test3'><button type="submit" class="btn btn-outline-primary">이전</button></Link> &ensp;
+            <button type="submit" class="btn btn-outline-primary" onClick={handleSubmit}>다음</button>
         </div>
 
     )

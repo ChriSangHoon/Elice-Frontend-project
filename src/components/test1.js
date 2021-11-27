@@ -3,6 +3,8 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 // import {useHistory} from 'react-router';
 import { Link, useHistory, useLocation} from 'react-router-dom';
+import {Button} from 'react-bootstrap';
+import './style.css';
 
 export default function Question_1(){
 
@@ -10,7 +12,7 @@ export default function Question_1(){
     const history = useHistory();
     const location = useLocation();
     const [percent,setPercent]= useState(0);
-
+    const [button,setButton]= useState('btn btn-outline-info');
     const [check,setCheck] = useState(()=> JSON.parse(window.localStorage.getItem("check")) || {
         B1: "",
         B2: "",
@@ -25,7 +27,8 @@ export default function Question_1(){
             [e.target.name] : e.target.value
         })
         setPercent(Math.round((e.target.className/28)*100))
-        console.log(percent);
+
+        // e.target.classList.add("btn btn-danger")
     }
 
     const [result,setResult]= useState([]);
@@ -43,6 +46,9 @@ export default function Question_1(){
         questionList()
     }, [check])
 
+    // function handleClcik(e){
+    //     e.target.className = 'btn btn-danger'
+    // }
         //렌더링 시에 한 번만 questionList를 실행한다.
     function handleSubmit(e){
         if(check.B1 ==='' || check.B2 ==='' || check.B3 ==='' || check.B4 ==='' || check.B5 ===''){
@@ -58,30 +64,35 @@ export default function Question_1(){
         }
     }
     return(
-        <div> 
-            <progress max="100" value={percent} ></progress> {percent}%
-            <p>Q1.{result[0]?.question}</p>
-            <input type="radio" name="B1" value='1' className='1' checked={check.B1 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}
-            <input type="radio" name="B1" value='2' className='1' checked={check.B1 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}
+        <div class="container"> 
+            <div class="progress" style={{height: '25px'}}>
+                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style={{width: `${percent}%`}}>{percent}%</div>
+            </div>
             <br/>
-            <p>Q2.{result[0]?.question}</p>
-            <input type="radio" name="B2" value='3' className='2' checked={check.B2 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}
-            <input type="radio" name="B2" value='4' className='2' checked={check.B2 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}
-            <br/>
-            <p>Q3.{result[0]?.question}</p>
-            <input type="radio" name="B3" value='5' className='3' checked={check.B3 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}
-            <input type="radio" name="B3" value='6' className='3' checked={check.B3 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}
-            <br/>
-            <p>Q4.{result[0]?.question}</p>
-            <input type="radio" name="B4" value='7' className='4' checked={check.B4 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}
-            <input type="radio" name="B4" value='8' className='4' checked={check.B4 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}
-            <br/>
-            <p>Q5.{result[0]?.question}</p>
-            <input type="radio" name="B5" value='9' className='5' checked={check.B5 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}
-            <input type="radio" name="B5" value='10' className='5' checked={check.B5 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}
-            <br/>
-            <Link to='/start'><button type="submit">이전</button></Link>
-            <button type="submit" onClick={handleSubmit}>다음</button>
+            <div class="question">
+                <p>Q1.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B1" value='1' className='1' checked={check.B1 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}</label> &ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B1" value='2' className='1' checked={check.B1 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}</label>
+                <br/><br/>
+                <p>Q2.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B2" value='3' className='2' checked={check.B2 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}</label>&ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B2" value='4' className='2' checked={check.B2 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}</label>
+                <br/><br/>
+                <p>Q3.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B3" value='5' className='3' checked={check.B3 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}</label>&ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B3" value='6' className='3' checked={check.B3 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}</label>
+                <br/><br/>
+                <p>Q4.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B4" value='7' className='4' checked={check.B4 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}</label>&ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B4" value='8' className='4' checked={check.B4 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}</label>
+                <br/><br/>
+                <p>Q5.{result[0]?.question}</p>
+                <label class="btn btn-outline-info"><input type="radio" name="B5" value='9' className='5' checked={check.B5 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}</label>&ensp;
+                <label class="btn btn-outline-info"><input type="radio" name="B5" value='10' className='5' checked={check.B5 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}</label>
+            </div>
+            <br/><br/>
+            <Link to='/start'><button type="submit" class="btn btn-outline-primary">이전</button></Link> &ensp;
+            <button type="submit" class="btn btn-outline-primary" onClick={handleSubmit}>다음</button>
         </div>
 
     )
