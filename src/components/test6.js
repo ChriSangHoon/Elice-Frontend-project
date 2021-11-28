@@ -12,7 +12,6 @@ export default function Question_6(){
         B27: "",
         B28: "",
     });
-
     const handleChange = e => {
         setCheck({
             ...check,
