@@ -260,8 +260,8 @@ export default function PrevResult(){
                 />
                 <br/>
             </div>
-            <p style={{textAlign:'center'}}> {location.state.userName}님은 <strong style={{color: 'rgba(0,0,255,0.4)'}}>{important}</strong>은(는) 중요하게 생각합니다.<br/>
-            반면에 <strong style={{color: 'rgba(0,0,255,0.4)'}}>{unimportant}</strong>(은)는 비교적 덜 중요하게 생각합니다.</p>
+            <p style={{textAlign:'center'}}> {location.state.userName}님은  <strong style={{color: 'rgba(0,0,255,0.4)'}}>{important}</strong>을(를) 중요하게 생각하며<br/>
+            <strong style={{color: 'rgba(0,0,255,0.4)'}}>{unimportant}</strong>(은)는 비교적 중요하지 않게 생각합니다.</p>
             <br/>
             <strong><p style={{textAlign:'left'}}>2. 가치관과 관련이 높은 직업</p></strong>
             <div style={{width:'100%', height:'80px', backgroundColor:'rgba(0,0,255,0.1)'}} >
