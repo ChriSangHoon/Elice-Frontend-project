@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 
 export default function Question_3(){
 
@@ -55,35 +55,41 @@ export default function Question_3(){
     }
     
     return(
-        <div class="container">
-            <div class="question">
-                <div class="progress" style={{height: '25px'}}>
-                    <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" style={{width: `${percent}%`}}>{percent}%</div>
+        <div className="container">
+            <div className="question">
+                <div className="progress" style={{height: '25px'}}>
+                    <div className="progress-bar bg-info progress-bar-striped progress-bar-animated" style={{width: `${percent}%`}}>{percent}%</div>
                 </div>
                 <br/>
                 <p>Q11.{result[0]?.question}</p>
-                <label class="btn btn-outline-info"><input type="radio" name="B11" value='21' className='11' checked={check.B11 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}</label> &ensp;
-                <label class="btn btn-outline-info"><input type="radio" name="B11" value='22' className='11' checked={check.B11 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B11" value='21' className='11' checked={check.B11 === result[0]?.answerScore01} onChange={handleChange}/> {result[0]?.answer01}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B11" value='22' className='11' checked={check.B11 === result[0]?.answerScore02} onChange={handleChange}/> {result[0]?.answer02}</label> &ensp;
                 <br/><br/>
                 <p>Q12.{result[0]?.question}</p>
-                <label class="btn btn-outline-info"><input type="radio" name="B12" value='23' className='12' checked={check.B12 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}</label> &ensp;
-                <label class="btn btn-outline-info"><input type="radio" name="B12" value='24' className='12' checked={check.B12 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B12" value='23' className='12' checked={check.B12 === result[1]?.answerScore01} onChange={handleChange}/> {result[1]?.answer01}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B12" value='24' className='12' checked={check.B12 === result[1]?.answerScore02} onChange={handleChange}/> {result[1]?.answer02}</label> &ensp;
                 <br/><br/>
                 <p>Q13.{result[0]?.question}</p>
-                <label class="btn btn-outline-info"><input type="radio" name="B13" value='25' className='13' checked={check.B13 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}</label> &ensp;
-                <label class="btn btn-outline-info"><input type="radio" name="B13" value='26' className='13' checked={check.B13 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B13" value='25' className='13' checked={check.B13 === result[2]?.answerScore01} onChange={handleChange}/> {result[2]?.answer01}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B13" value='26' className='13' checked={check.B13 === result[2]?.answerScore02} onChange={handleChange}/> {result[2]?.answer02}</label> &ensp;
                 <br/><br/>
                 <p>Q14.{result[0]?.question}</p>
-                <label class="btn btn-outline-info"><input type="radio" name="B14" value='27' className='14' checked={check.B14 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}</label> &ensp;
-                <label class="btn btn-outline-info"><input type="radio" name="B14" value='28' className='14' checked={check.B14 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B14" value='27' className='14' checked={check.B14 === result[3]?.answerScore01} onChange={handleChange}/> {result[3]?.answer01}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B14" value='28' className='14' checked={check.B14 === result[3]?.answerScore02} onChange={handleChange}/> {result[3]?.answer02}</label> &ensp;
                 <br/><br/>
                 <p>Q15.{result[0]?.question}</p>
-                <label class="btn btn-outline-info"><input type="radio" name="B15" value='29' className='15' checked={check.B15 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}</label> &ensp;
-                <label class="btn btn-outline-info"><input type="radio" name="B15" value='30' className='15' checked={check.B15 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B15" value='29' className='15' checked={check.B15 === result[4]?.answerScore01} onChange={handleChange}/> {result[4]?.answer01}</label> &ensp;
+                <label className="btn btn-outline-info"><input type="radio" name="B15" value='30' className='15' checked={check.B15 === result[4]?.answerScore02} onChange={handleChange}/> {result[4]?.answer02}</label> &ensp;
             </div>
             <br/><br/>
-            <Link to='/test2'><button type="submit" class="btn btn-outline-primary">이전</button></Link> &ensp;
-            <button type="submit" class="btn btn-outline-primary" onClick={handleSubmit}>다음</button>
+            <button type="submit" className="btn btn-outline-primary" onClick={()=>{
+                history.push({
+                    pathname:'/test2',
+                    state: {...location.state}
+                })
+                window.location.href='/test2'
+            }}>이전</button> &ensp;
+            <button type="submit" className="btn btn-outline-primary" onClick={handleSubmit}>다음</button>
         </div>
 
     )

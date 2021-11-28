@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 // import './style.css';
 
 export default function Mainpage(){
@@ -40,16 +40,16 @@ export default function Mainpage(){
     }
 
     return(
-        <div class="container">
+        <div className="container">
             <form method="get">
                 <h1>직업가치관검사</h1>
                 <br/><br/><br/>
                 <h4>이름</h4>
-                <input type="text" class="btn btn-outline-primary" name = "userName" placeholder="이름을 입력하세요." onChange={handleChange} />
+                <input type="text" className="btn btn-outline-primary" name = "userName" placeholder="이름을 입력하세요." onChange={handleChange} />
                 <br/><br/>
                 <h4>성별</h4>
-                <label class="btn btn-outline-primary"><input type="radio" name="userGender" value="100323" onClick={handleChange}/>남자</label> &ensp;
-                <label class="btn btn-outline-primary"><input type="radio" name="userGender" value="100324" onClick={handleChange}/>여자</label>
+                <label className="btn btn-outline-primary"><input type="radio" name="userGender" value="100323" onClick={handleChange}/>남자</label> &ensp;
+                <label className="btn btn-outline-primary"><input type="radio" name="userGender" value="100324" onClick={handleChange}/>여자</label>
                 <br/><br/>
                 <button type="submit" className="btn btn-outline-primary" onClick={handleSubmit}>검사 시작</button>
                 

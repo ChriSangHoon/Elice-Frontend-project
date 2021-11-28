@@ -86,7 +86,7 @@ export default function PrevResult(){
 
             wonList.forEach((num)=>{
                 let data = num.split('=');
-                if(data[0] != ""){
+                if(data[0] !== ""){
                     obj = {
                         ...obj,
                         [data[0]] : data[1],
@@ -119,31 +119,32 @@ export default function PrevResult(){
 
             const eduUrl = await axios.get(`https://inspct.career.go.kr/inspct/api/psycho/value/jobs?no1=${no_1}&no2=${no_2}`);
             eduUrl.data.map((item,i)=>{
-                if(item[2]=== 1){
+                if(item[2] == 1){
                     setMid(()=>{
                         newMid.push(eduUrl.data[i][1]);
-                        return newMid;
+                        const set = new Set(newMid);
+                        return [...set];
                     })
-                }else if(item[2]=== 2){
+                }else if(item[2] == 2){
                     setHigh(()=>{
                         newHigh.push(eduUrl?.data[i][1]);
                         const set = new Set(newHigh);
                         return [...set];
                     })
 
-                }else if(item[2]=== 3){
+                }else if(item[2] == 3){
                     setCol(()=>{
                         newCol.push(eduUrl.data[i][1]);
                         const set = new Set(newCol);
                         return [...set];
                     })
-                }else if(item[2]=== 4){
+                }else if(item[2]== 4){
                     setUniv(()=>{
                         newUniv.push(eduUrl.data[i][1]);
                         const set = new Set(newUniv);
                         return [...set];
                     })
-                }else if(item[2]==5){
+                }else if(item[2]== 5){
                     setGrad(()=>{
                         newGrad.push(eduUrl.data[i][1]);
                         const set = new Set(newGrad);
@@ -162,51 +163,51 @@ export default function PrevResult(){
             const majorUrl = await axios.get(`https://inspct.career.go.kr/inspct/api/psycho/value/majors?no1=${no_1}&no2=${no_2}`);
 
             majorUrl.data.map((item,i)=>{
-                if(item[2]==0){
+                if(item[2]== 0){
                     setNone(()=>{
                         newNone.push(majorUrl?.data[i][1]);
                         const set = new Set(newNone);
                         return [...set];
                     })
-                }else if(item[2]==1){
+                }else if(item[2]== 1){
                     setHum(()=>{
                         newHum.push(majorUrl?.data[i][1]);
                         const set = new Set(newHigh);
                         return [...set];
                     })
-                }else if(item[2]==2){
+                }else if(item[2]== 2){
                     setSoc(()=>{
                         newSoc.push(majorUrl.data[i][1]);
                         const set = new Set(newSoc);
                         return [...set];
                     })
-                }else if(item[2]==3){
+                }else if(item[2]== 3){
                     setEdu(()=>{
                         newEdu.push(majorUrl.data[i][1]);
                         const set = new Set(newEdu);
                         return [...set];
                     })
-                }else if(item[2]==4){
+                }else if(item[2]== 4){
                     setEng(()=>{
                         newEng.push(majorUrl.data[i][1]);
                         const set = new Set(newEng);
                         return [...set];
                     })
-                }else if(item[2]==5){
+                }else if(item[2]== 5){
                     setNat(()=>{
                         newNat.push(majorUrl.data[i][1]);
                         const set = new Set(newNat);
                         return [...set];
                     })
                 }
-                else if(item[2]==6){
+                else if(item[2]== 6){
                     setMed(()=>{
                         newMed.push(majorUrl.data[i][1]);
                         const set = new Set(newMed);
                         return [...set];
                     })
                 }
-                else if(item[2]==7){
+                else if(item[2]== 7){
                     setArtphy(()=>{
                         newArtphy.push(majorUrl.data[i][1]);
                         const set = new Set(newArtphy);
@@ -224,7 +225,7 @@ export default function PrevResult(){
     },[])
 
     return(
-        <div class="container">
+        <div className="container">
             <h1 style={{color: 'rgba(0,0,255,0.4)'}}>직업가치관검사 결과표</h1>
                 <br/>
                 <p style={{textAlign:'left'}}>직업가치관이란 직업을 선택할 때 영향을 끼치는 자신만의 믿음과 신념입니다.
@@ -232,7 +233,7 @@ export default function PrevResult(){
                 직업가치관검사는 여러분이 직업을 선택할 때 상대적으로 어떠한 가치를 중요하게 생각하는지를 알려줍니다. 
                 또한 본인이 가장 중요하게 생각하는 가치를 충족시켜줄 수 있는 직업에 대해 생각해 볼 기회를 제공합니다.</p>
             <br/>
-            <table class="table table-bordered" border="3">
+            <table className="table table-bordered" border="3">
                 <thead>
                     <tr>
                         <th>이름</th>
@@ -241,7 +242,7 @@ export default function PrevResult(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="success">
+                    <tr className="success">
                         <td>{location.state.userName}</td>
                         <td>{gender}</td>
                         <td>{today.getFullYear()} / {today.getMonth()+1} / {today.getDate()}</td>
@@ -267,7 +268,7 @@ export default function PrevResult(){
                 <strong><p style={{fontSize: '20px', lineHeight: '80px'}}>종사자 평균 학력별</p></strong>
             </div>
             <br/>
-            <table class="table table-bordered" border="3">
+            <table className="table table-bordered" border="3">
                 <thead>
                     <tr>
                         <th>분야</th>
@@ -275,7 +276,7 @@ export default function PrevResult(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="success">
+                    <tr className="success">
                         <td>중학교 졸업 이하</td>
                         <td>{mid.join(', ')}</td>
                     </tr>
@@ -300,7 +301,7 @@ export default function PrevResult(){
             <div style={{width:'100%', height:'80px', backgroundColor:'rgba(0,0,255,0.1)'}} >
                 <strong><p style={{fontSize: '20px', lineHeight: '80px'}}>종사자 평균 전공별</p></strong>
             </div>
-            <table class="table table-bordered" border="3">
+            <table className="table table-bordered" border="3">
                 <thead>
                     <tr>
                         <th>분야</th>
@@ -308,7 +309,7 @@ export default function PrevResult(){
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="success">
+                    <tr className="success">
                         <td>계열무관</td>
                         <td>{none.join(', ')}</td>
                     </tr>
@@ -344,7 +345,7 @@ export default function PrevResult(){
             </table>
             <br/>
             <br/>
-            <Link to='/' onClick={localStorage.clear()}><button type="submit" class="btn btn-outline-primary">다시 검사하기</button></Link> &ensp;
+            <Link to='/' onClick={localStorage.clear()}><button type="submit" className="btn btn-outline-primary">다시 검사하기</button></Link> &ensp;
 
         <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
         </div>
